@@ -31,7 +31,8 @@ Goal: project mail never mixes with personal mail, and every message shows which
 
 - Each alias forwards to its own Gmail plus address. Gmail sorts on `deliveredto:`, which works even for Bcc and mailing-list mail, where the `To:` header does not show our address. Each plus address is a separate destination to verify once [human].
 - The real Gmail address never enters the public repo: Terraform reads it from a sensitive variable (local env var, GitHub secret in CI).
-- Gmail delivers plus addresses to the main inbox. Cloudflare's docs do not say whether a plus address is accepted as a destination: to confirm with the first one. Fallback: one destination, filters on `to:` per alias.
+- Gmail delivers plus addresses to the main inbox. Cloudflare accepts plus addresses as destinations (confirmed 2026-11-11).
+- Cloudflare refuses a forwarding rule whose destination is not verified yet. The first apply creates the destinations and sends the verification mail; the rules are created by a second apply after the owner clicks the links.
 
 ### Gmail: labels and filters [human-approved]
 
