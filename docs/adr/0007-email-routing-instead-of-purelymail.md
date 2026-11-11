@@ -15,6 +15,31 @@ The brief uses Purelymail (10 $/year) as the mailbox for the domain. Its checkou
 - **As code:** Email Routing settings, rules and DNS records are managed by Terraform in the `dns-email` module. The destination Gmail address is verified once by the owner [human].
 - No new account and no payment.
 
+## Mail organization
+
+Goal: project mail never mixes with personal mail, and every message shows which address it came through.
+
+### Cloudflare: one address per purpose
+
+| Address | Receives | Forwarded to | Gmail label |
+|---|---|---|---|
+| `hello@` | Public contact: people, recruiters, replies to the site | `<gmail>+hello@gmail.com` | `eduardiacob.dev/hello` |
+| `ops@` | Machine alerts: AWS Budgets, SNS/CloudWatch alarms, Cloudflare notifications, Brevo | `<gmail>+ops@gmail.com` | `eduardiacob.dev/ops` |
+| `aws@` | AWS root account only (ADR-0006) | `<gmail>+aws@gmail.com` | `eduardiacob.dev/aws` |
+| `noreply@` | Nothing: sender of contact-form notifications via Brevo, no inbound rule | — | — |
+| anything else | Dropped (catch-all = drop) | — | — |
+
+- Each alias forwards to its own Gmail plus address. Gmail sorts on `deliveredto:`, which works even for Bcc and mailing-list mail, where the `To:` header does not show our address. Each plus address is a separate destination to verify once [human].
+- The real Gmail address never enters the public repo: Terraform reads it from a sensitive variable (local env var, GitHub secret in CI).
+- Gmail delivers plus addresses to the main inbox. Cloudflare's docs do not say whether a plus address is accepted as a destination: to confirm with the first one. Fallback: one destination, filters on `to:` per alias.
+
+### Gmail: labels and filters [human-approved]
+
+- Labels: `eduardiacob.dev` with children `hello`, `ops`, `aws`, `accounts`, one colour each.
+- One filter per plus address → its label, never sent to Spam. Mail stays in the inbox: alerts and the AWS root mail must be seen.
+- `accounts`: mail that project services send straight to Gmail (Cloudflare, GitHub, Brevo), filtered by sender. These accounts keep Gmail as their login email so recovery never depends on our own domain.
+- Sending: "Send mail as `hello@`" via Brevo SMTP, with "reply from the same address the message was sent to" on.
+
 ## Consequences
 
 - Fixed yearly cost drops to the domain only (about 12 $).
