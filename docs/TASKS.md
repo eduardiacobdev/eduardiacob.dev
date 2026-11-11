@@ -23,7 +23,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | done | 2026-11-11: registered until 2027-11-11, auto-renew on ($12.20/yr), transfer lock on, WHOIS redacted. DNSSEC left to Terraform (T3.2) |
 | T1.5 | Enable R2 (requires a payment method on file, stays 0 $ in free quota) | E+C | done | 2026-11-11: R2 on, bucket `eduardiacob-dev-tfstate` in EU jurisdiction, bucket-scoped key in Keychain. See `docs/runbooks/local-secrets.md` |
 | T1.6 | Cloudflare API token `terraform-eduardiacob-dev` (DNS, zone settings, Email Routing, Turnstile; one zone) | E+C | done | 2026-11-11: account token, expires 2027-11-11, in Keychain, verified via API. No R2 scope: state uses the bucket key |
-| T1.7 | Domain mail: Cloudflare Email Routing, `hello@` `ops@` `aws@` → Gmail (ADR-0007) | E+C | doing | 2026-11-11: MX/SPF/DKIM, 3 destinations and catch-all drop applied (MX change confirmed by E). Waiting: E clicks the 3 verification links, then C applies the rules and tests delivery |
+| T1.7 | Domain mail: Cloudflare Email Routing, `hello@` `ops@` `aws@` → Gmail (ADR-0007) | E+C | doing | 2026-11-11: MX/SPF/DKIM, 3 destinations and catch-all drop applied (MX change confirmed by E). Destinations verified, 3 forward rules applied, no drift. Waiting: delivery test from an outside address |
 | T1.8 | AWS account, **advanced** sign-up, Free plan, root MFA | E | blocked | Wait for T2.x + Email Routing live (ADR-0006): saves free-plan months |
 | T1.9 | IAM admin user with MFA (ADR-0002), `aws login` works | E+C | todo | C gives exact clicks; E sets password/MFA |
 | T1.10 | Brevo free account, API key into SSM | E+C | todo | Key typed by E in a hidden terminal prompt |
@@ -34,7 +34,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
-| T2.1 | Tooling: Terraform/OpenTofu, pnpm, pre-commit, gitleaks | C | todo | |
+| T2.1 | Tooling: Terraform/OpenTofu, pnpm, pre-commit, gitleaks | C | doing | 2026-11-11: Terraform 1.17.2 in `~/.local/bin` (Homebrew blocked by old Command Line Tools). Rest todo |
 | T2.2 | Scaffold `apps/web` (Next.js static export) | C | todo | |
 | T2.3 | Scaffold `apps/api` (Laravel + Bref, health + contact) | C | todo | |
 | T2.4 | Terraform modules: dns-email, guardrails, cloudfront, lambda-api, dynamodb | C | todo | |
@@ -44,7 +44,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
-| T3.1 | R2 state backend, `terraform init` | C | todo | Needs T1.5, T1.6 |
+| T3.1 | R2 state backend, `terraform init` | C | done | 2026-11-11: state in `eduardiacob-dev-tfstate`, lockfile locking, `scripts/tf.sh` |
 | T3.2 | DNS + email records, DNSSEC, CAA | C | todo | E confirms MX change |
 | T3.3 | Guardrails: budgets, Budget Action, anomaly detection, SNS | C | todo | First thing on AWS |
 | T3.4 | GitHub OIDC + deploy role | C | todo | |

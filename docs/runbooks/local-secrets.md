@@ -11,6 +11,7 @@ All items use service name `eduardiacob-dev/<name>` and account `$USER`.
 | `r2-access-key-id` | R2 account API token `terraform-state-eduardiacob-dev`, access key | Object Read & Write on bucket `eduardiacob-dev-tfstate` only | 2026-11-11 | 2027-11-11 |
 | `r2-secret-access-key` | Same token, secret key | same | 2026-11-11 | 2027-11-11 |
 | `cloudflare-api-token` | Cloudflare account API token `terraform-eduardiacob-dev` | see below | 2026-11-11 | 2027-11-11 |
+| `gmail-address` | Owner's Gmail address, destination of the Email Routing aliases (ADR-0007). Not a credential, kept out of the public repo | — | 2026-11-11 | — |
 
 Cloudflare token permissions (least privilege for the `dns-email` and Turnstile work):
 
@@ -48,6 +49,12 @@ region = auto
 Verified on 2026-11-11: `s3api list-objects-v2` on the bucket succeeds, `s3api list-buckets` is denied (the key is bucket-scoped).
 
 R2 has no spending cap. The bucket stays far below the free quota (10 GB, 1M Class A, 10M Class B per month); a Cloudflare billing notification is the alarm.
+
+## Running Terraform locally
+
+- Terraform is the official HashiCorp binary in `~/.local/bin/terraform` (SHA256 and Apple notarization checked). Add `export PATH="$HOME/.local/bin:$PATH"` to `~/.zprofile`; [`scripts/tf.sh`](../../scripts/tf.sh) falls back to that path anyway.
+- Always go through the wrapper: `scripts/tf.sh init`, `scripts/tf.sh plan -out=x.tfplan`, `scripts/tf.sh apply x.tfplan`. It exports `CLOUDFLARE_API_TOKEN` and `TF_VAR_gmail_address` from the Keychain into the Terraform process only, and passes `profile=r2` to `init`.
+- Bootstrap exception: the first Email Routing apply (2026-11-11) ran locally because the repo was not on GitHub yet. From the first push on, infra changes go through a PR with the plan attached.
 
 ## Rotation
 
