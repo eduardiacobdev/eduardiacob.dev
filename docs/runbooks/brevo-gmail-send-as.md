@@ -42,6 +42,10 @@ The SMTP key exists only in Brevo (hashed) and in Gmail. It is not in the Keycha
 - Gmail hides a received message whose Message-ID matches one it sent. A test from `hello@` to `ops@` or `hello@` (both forward to the same Gmail) shows only the sent copy. Brevo > Transactional > Logs still shows `Sent` and `Delivered`.
 - To check authentication, send from `hello@` to a mailbox outside this Gmail and look at the headers: `dkim=pass header.d=eduardiacob.dev` and `dmarc=pass`.
 
+Verified on 2026-11-12 (test to an external mailbox): `dkim=pass header.d=eduardiacob.dev`, `dmarc=pass header.from=eduardiacob.dev`, `spf=pass` for the Return-Path `…@gy.d.sender-sib.com` (Brevo, not aligned).
+
+Open item: Brevo logged a "Loaded by proxy" event for that test, so it adds an open-tracking pixel even to mail relayed from Gmail. Check whether open/click tracking can be turned off for SMTP relay; recipients of personal mail from `hello@` should not be tracked.
+
 ## Rotation (TASKS T1.11)
 
 The SMTP key expires about 2027-11-12. Rotate in October 2027:
