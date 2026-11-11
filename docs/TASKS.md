@@ -38,7 +38,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T2.2 | Scaffold `apps/web` (Next.js static export) | C | todo | |
 | T2.3 | Scaffold `apps/api` (Laravel + Bref, health + contact) | C | todo | |
 | T2.4 | Terraform modules: dns-email, guardrails, cloudfront, lambda-api, dynamodb | C | todo | |
-| T2.5 | CI: lint, test, `plan`, tfsec/checkov, CodeQL, Dependabot | C | todo | |
+| T2.5 | CI: lint, test, `plan`, tfsec/checkov, CodeQL, Dependabot | C | doing | 2026-11-12: PR #1 adds gitleaks, terraform fmt/validate/tflint, checkov, shellcheck, plan as PR comment, CodeQL (actions), Dependabot; Actions locked down (SHA pinning, read-only token). See `docs/runbooks/ci.md`. Next: required checks + PR rule on `main`, app lint/test when apps exist |
 
 ## Phase 3 — Go live (brief phases 2–10)
 

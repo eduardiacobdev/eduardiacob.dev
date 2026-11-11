@@ -1,0 +1,31 @@
+# Version updates (architecture review A3). Security updates are on in the
+# repo settings. Cooldown skips releases younger than a week.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: ci
+
+  - package-ecosystem: terraform
+    directories:
+      - /infra/envs/prod
+      - /infra/modules/*
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    groups:
+      terraform:
+        patterns: ["*"]
+    commit-message:
+      prefix: build

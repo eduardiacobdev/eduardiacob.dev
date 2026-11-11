@@ -58,6 +58,6 @@ R2 has no spending cap. The bucket stays far below the free quota (10 GB, 1M Cla
 
 ## Rotation
 
-Both tokens expire on 2027-11-11. The Brevo SMTP key used by Gmail is not in the Keychain; it has its own steps in [`brevo-gmail-send-as.md`](brevo-gmail-send-as.md). Rotate in October 2027 (TASKS T1.11): create the new token in the dashboard, store it with `scripts/keychain-set.sh`, update the GitHub secrets, run `terraform plan`, then delete the old token.
+Both tokens expire on 2027-11-11. The Brevo SMTP key used by Gmail is not in the Keychain; it has its own steps in [`brevo-gmail-send-as.md`](brevo-gmail-send-as.md). Rotate in October 2027 (TASKS T1.11): create the new token in the dashboard, store it with `scripts/keychain-set.sh`, copy it to the GitHub secrets with `scripts/gh-secrets-sync.sh` ([CI runbook](ci.md)), run `terraform plan`, then delete the old token.
 
 If a secret leaks: revoke it in the Cloudflare dashboard first, then rotate.
