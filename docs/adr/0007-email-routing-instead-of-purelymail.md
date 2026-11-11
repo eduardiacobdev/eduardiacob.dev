@@ -47,4 +47,5 @@ Goal: project mail never mixes with personal mail, and every message shows which
 - Fixed yearly cost drops to the domain only (about 12 $).
 - Mail lives in the personal Gmail, not in a separate mailbox. Gmail stays the root of the recovery chain (it already was).
 - If Email Routing breaks, domain addresses stop receiving mail. Cloudflare login does not depend on domain mail, so the owner can always fix it. The AWS root email (`aws@`, ADR-0006) inherits this dependency; the routing config is under version control and checked by `terraform plan`.
+- Mail sent as `hello@` passes through Brevo, which adds an open-tracking pixel that the free plan cannot remove. Tracking is set to anonymous (aggregate counts only); see the runbook.
 - Revisit if the owner needs a separate mailbox (e.g. shared access), with any provider that accepts the owner's payment methods.

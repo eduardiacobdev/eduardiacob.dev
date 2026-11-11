@@ -13,6 +13,7 @@ Outbound mail from `hello@eduardiacob.dev` leaves Gmail through Brevo SMTP (ADR-
 | DMARC `p=none`, reports to Cloudflare DMARC Management | Cloudflare DNS | `cloudflare_dns_record.dmarc` (imported) | Terraform |
 | Sender `hello@eduardiacob.dev` | Brevo > Senders | Verified automatically (authenticated domain) | [human-approved] |
 | SMTP key `gmail-send-as-hello` | Brevo > SMTP & API > SMTP | Standard key, expires about 2027-11-12 | [human] |
+| Anonymous tracking | Brevo > Settings > Transactional email > Tracking | Yes | [human-approved] |
 | Gmail "Send mail as" `hello@` | Gmail > Settings > Accounts and Import | Via Brevo SMTP, reply from the same address on | [human-approved] |
 
 Records live in [`infra/modules/dns-email/outbound.tf`](../../infra/modules/dns-email/outbound.tf). They are public DNS data, not secrets.
@@ -44,7 +45,13 @@ The SMTP key exists only in Brevo (hashed) and in Gmail. It is not in the Keycha
 
 Verified on 2026-11-12 (test to an external mailbox): `dkim=pass header.d=eduardiacob.dev`, `dmarc=pass header.from=eduardiacob.dev`, `spf=pass` for the Return-Path `…@gy.d.sender-sib.com` (Brevo, not aligned).
 
-Open item: Brevo logged a "Loaded by proxy" event for that test, so it adds an open-tracking pixel even to mail relayed from Gmail. Check whether open/click tracking can be turned off for SMTP relay; recipients of personal mail from `hello@` should not be tracked.
+## Tracking pixel (accepted limit)
+
+Brevo logged a "Loaded by proxy" event for the external test: it adds an open-tracking pixel even to mail relayed from Gmail.
+
+- It cannot be removed on the free plan. `removeTrackingPixel` exists only on Enterprise and only for API sends, not SMTP relay.
+- Mitigation [human-approved, 2026-11-12]: Brevo > Settings > Transactional email > Tracking > "Anonymous email tracking" = **Yes**. Opens and clicks are counted in aggregate only, never tied to a recipient.
+- Revisit if tracking of personal mail from `hello@` becomes a problem (e.g. the CNIL consent recommendation for open tracking): that means another SMTP relay, which needs the owner's approval.
 
 ## Rotation (TASKS T1.11)
 
