@@ -18,3 +18,5 @@ See [`docs/reviews/2026-11-11-architecture-review.md`](docs/reviews/2026-11-11-a
 ## Rebuild from scratch
 
 Instructions will be added as each phase lands.
+
+- Local secrets and the R2 state backend: [`docs/runbooks/local-secrets.md`](docs/runbooks/local-secrets.md).
