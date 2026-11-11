@@ -23,12 +23,12 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | done | 2026-11-11: registered until 2027-11-11, auto-renew on ($12.20/yr), transfer lock on, WHOIS redacted. DNSSEC left to Terraform (T3.2) |
 | T1.5 | Enable R2 (requires a payment method on file, stays 0 $ in free quota) | E+C | done | 2026-11-11: R2 on, bucket `eduardiacob-dev-tfstate` in EU jurisdiction, bucket-scoped key in Keychain. See `docs/runbooks/local-secrets.md` |
 | T1.6 | Cloudflare API token `terraform-eduardiacob-dev` (DNS, zone settings, Email Routing, Turnstile; one zone) | E+C | done | 2026-11-11: account token, expires 2027-11-11, in Keychain, verified via API. No R2 scope: state uses the bucket key |
-| T1.7 | Domain mail: Cloudflare Email Routing, `hello@` `ops@` `aws@` → Gmail (ADR-0007) | E+C | doing | 2026-11-11: MX/SPF/DKIM, 3 destinations and catch-all drop applied (MX change confirmed by E). Destinations verified, 3 forward rules applied, no drift. Gmail labels and filters set up (`docs/runbooks/gmail-filters.md`). Waiting: delivery test from an outside address |
+| T1.7 | Domain mail: Cloudflare Email Routing, `hello@` `ops@` `aws@` → Gmail (ADR-0007) | E+C | done | 2026-11-11: MX/SPF/DKIM, 3 destinations, 3 forward rules and catch-all drop applied, no drift (MX change confirmed by E). Gmail labels and filters set up (`docs/runbooks/gmail-filters.md`). Delivery test from an external mailbox: all 3 aliases arrived in about 20 s with the right label, SPF/DKIM/DMARC/ARC pass, DKIM signed by `eduardiacob.dev` |
 | T1.8 | AWS account, **advanced** sign-up, Free plan, root MFA | E | blocked | Wait for T2.x + Email Routing live (ADR-0006): saves free-plan months |
 | T1.9 | IAM admin user with MFA (ADR-0002), `aws login` works | E+C | todo | C gives exact clicks; E sets password/MFA |
 | T1.10 | Brevo free account, API key into SSM | E+C | todo | Key typed by E in a hidden terminal prompt |
 | T1.11 | Rotate R2 key and Cloudflare token (both expire 2027-11-11) | E+C | todo | Due October 2027, steps in `docs/runbooks/local-secrets.md` |
-| T1.12 | Cloudflare billing notification (R2 has no spend cap) | E+C | todo | Alert to `ops@` once Email Routing is live |
+| T1.12 | Cloudflare billing notification (R2 has no spend cap) | E+C | todo | Alert to `ops@` (Email Routing live since 2026-11-11) |
 
 ## Phase 2 — Build (agent, local first)
 
