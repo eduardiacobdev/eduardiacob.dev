@@ -17,7 +17,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
-| T1.1 | GitHub: username `eduardiacobdev`, 2FA + passkey, email private | E | doing | Username done 2026-11-11; 2FA and email privacy pending |
+| T1.1 | GitHub: username `eduardiacobdev`, 2FA + passkey, email private | E | doing | Username, email privacy + push block done 2026-11-11; 2FA pending |
 | T1.2 | Create the public repo `eduardiacob.dev` and push | C | todo | Needs T1.1 + `gh auth login` (E runs it once) |
 | T1.3 | Cloudflare account (personal Gmail, see recovery chain), 2FA on | E | doing | Account created; 2FA pending |
 | T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | todo | C searches and pre-fills; E enters contact/payment and confirms |
