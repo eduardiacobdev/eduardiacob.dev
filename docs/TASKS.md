@@ -20,7 +20,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T1.1 | GitHub: username `eduardiacobdev`, 2FA + passkey, email private | E | done | 2026-11-11: username, email privacy + push block, TOTP 2FA; recovery codes kept outside the repo |
 | T1.2 | Create the public repo `eduardiacob.dev` and push | C | todo | Needs T1.1 + `gh auth login` (E runs it once) |
 | T1.3 | Cloudflare account (personal Gmail, see recovery chain), 2FA on | E | done | 2026-11-11: TOTP 2FA active; security key optional |
-| T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | todo | C searches and pre-fills; E enters contact/payment and confirms |
+| T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | done | 2026-11-11: registered until 2027-11-11, auto-renew on ($12.20/yr), transfer lock on, WHOIS redacted. DNSSEC left to Terraform (T3.2) |
 | T1.5 | Enable R2 (requires a payment method on file, stays 0 $ in free quota) | E | todo | |
 | T1.6 | Cloudflare API token: Zone DNS Edit (this zone), Turnstile Edit, R2 Edit | E+C | todo | C configures scopes; E copies the token into the terminal prompt C prepares |
 | T1.7 | Purelymail account, Simple plan (10 $/yr) | E | todo | |
