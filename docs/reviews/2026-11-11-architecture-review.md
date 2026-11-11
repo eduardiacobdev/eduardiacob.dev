@@ -2,7 +2,15 @@
 
 Reviewer: platform/DevOps lead
 Input: the infrastructure brief v1 (private, not in the repo)
-Status: **Approved with changes** — items marked *Needs owner decision* change a "closed" decision in the brief and wait for Eduard.
+Status: **Approved with changes** — all findings resolved by the owner on 2026-11-11:
+
+| Finding | Resolution |
+|---|---|
+| F1 | [ADR-0002](../adr/0002-aws-access-without-identity-center.md) |
+| F2 | [ADR-0003](../adr/0003-contact-form-abuse-protection.md) |
+| F3 | Accepted as implementation note |
+| F4 | [ADR-0004](../adr/0004-async-notifications-via-dynamodb-streams.md) |
+| F5 | [ADR-0005](../adr/0005-cost-ceiling.md) — domain + Purelymail kept, rest 0 $ (tolerance 5 €/month) |
 
 ## Verdict
 
