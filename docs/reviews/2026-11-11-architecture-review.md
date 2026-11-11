@@ -10,7 +10,7 @@ Status: **Approved with changes** — all findings resolved by the owner on 2026
 | F2 | [ADR-0003](../adr/0003-contact-form-abuse-protection.md) |
 | F3 | Accepted as implementation note |
 | F4 | [ADR-0004](../adr/0004-async-notifications-via-dynamodb-streams.md) |
-| F5 | [ADR-0005](../adr/0005-cost-ceiling.md) — domain + Purelymail kept, rest 0 $ (tolerance 5 €/month) |
+| F5 | [ADR-0005](../adr/0005-cost-ceiling.md) — rest 0 $ (tolerance 5 €/month); Purelymail first kept, then replaced by Email Routing in [ADR-0007](../adr/0007-email-routing-instead-of-purelymail.md) |
 
 ## Verdict
 

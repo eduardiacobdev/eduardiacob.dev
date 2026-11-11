@@ -16,7 +16,7 @@ The architecture needs an ACM certificate in `us-east-1` for CloudFront, `eu-cen
 
 - Use **Sign up for AWS (advanced)** on the Free plan.
 - Create the account **only when the Phase 2 code is ready to deploy** (TASKS T2.x done), so the 6 free months are spent running, not waiting.
-- Root email: a dedicated address on our own domain once Purelymail is live (e.g. `aws-root@`), so account recovery does not depend on a personal mailbox.
+- Root email: `aws@eduardiacob.dev`, forwarded to the owner's Gmail by Cloudflare Email Routing (ADR-0007). The address is unique to AWS and can be re-pointed without touching the AWS account. Email Routing must be live and tested before sign-up.
 
 ## Consequences
 

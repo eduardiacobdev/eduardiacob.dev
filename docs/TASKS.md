@@ -9,7 +9,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
-| T0.1 | Architecture review + ADRs 0001–0006 | C | done | `docs/reviews`, `docs/adr` |
+| T0.1 | Architecture review + ADRs 0001–0007 | C | done | `docs/reviews`, `docs/adr` |
 | T0.2 | Brand brief: who you are, target, 2–3 reference sites | E | todo | E answers, C writes it up |
 | T0.3 | Brand identity (name treatment, palette, type, voice) | C | todo | After T0.2 |
 
@@ -23,8 +23,8 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | done | 2026-11-11: registered until 2027-11-11, auto-renew on ($12.20/yr), transfer lock on, WHOIS redacted. DNSSEC left to Terraform (T3.2) |
 | T1.5 | Enable R2 (requires a payment method on file, stays 0 $ in free quota) | E | todo | |
 | T1.6 | Cloudflare API token: Zone DNS Edit (this zone), Turnstile Edit, R2 Edit | E+C | todo | C configures scopes; E copies the token into the terminal prompt C prepares |
-| T1.7 | Purelymail account, Simple plan (10 $/yr) | E | todo | |
-| T1.8 | AWS account, **advanced** sign-up, Free plan, root MFA | E | blocked | Wait for T2.x + Purelymail (ADR-0006): saves free-plan months |
+| T1.7 | Domain mail: Cloudflare Email Routing, `hello@` `ops@` `aws@` → Gmail (ADR-0007) | E+C | todo | C writes it in Terraform (T3.2); E verifies the Gmail destination link and confirms the MX change. Purelymail dropped (ADR-0007) |
+| T1.8 | AWS account, **advanced** sign-up, Free plan, root MFA | E | blocked | Wait for T2.x + Email Routing live (ADR-0006): saves free-plan months |
 | T1.9 | IAM admin user with MFA (ADR-0002), `aws login` works | E+C | todo | C gives exact clicks; E sets password/MFA |
 | T1.10 | Brevo free account, API key into SSM | E+C | todo | Key typed by E in a hidden terminal prompt |
 

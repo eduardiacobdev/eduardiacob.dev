@@ -5,7 +5,7 @@
 
 ## Context
 
-The owner accepts the fixed yearly costs of the domain (about 12 $) and Purelymail (10 $). Everything else must be 0, with an absolute tolerance of 5 €/month.
+The owner accepts the fixed yearly cost of the domain (about 12 $). Purelymail (10 $) was accepted at first and later dropped by [ADR-0007](0007-email-routing-instead-of-purelymail.md). Everything else must be 0, with an absolute tolerance of 5 €/month.
 
 ## Decision
 
@@ -17,4 +17,4 @@ The owner accepts the fixed yearly costs of the domain (about 12 $) and Purelyma
 ## Consequences
 
 - `eduardiacob.io` is not purchased.
-- Purelymail stays as the mailbox provider.
+- No paid mailbox: domain mail goes through Cloudflare Email Routing (ADR-0007).
