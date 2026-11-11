@@ -48,7 +48,7 @@ region = auto
 
 Verified on 2026-11-11: `s3api list-objects-v2` on the bucket succeeds, `s3api list-buckets` is denied (the key is bucket-scoped).
 
-R2 has no spending cap. The bucket stays far below the free quota (10 GB, 1M Class A, 10M Class B per month); a Cloudflare billing notification is the alarm.
+R2 has no spending cap. The bucket stays far below the free quota (10 GB, 1M Class A, 10M Class B per month); a Cloudflare billing alert at 1 USD to `ops@` is the alarm ([runbook](cloudflare-billing-alert.md)).
 
 ## Running Terraform locally
 

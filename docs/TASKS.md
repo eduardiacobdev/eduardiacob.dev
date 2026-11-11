@@ -28,7 +28,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T1.9 | IAM admin user with MFA (ADR-0002), `aws login` works | E+C | todo | C gives exact clicks; E sets password/MFA |
 | T1.10 | Brevo free account, API key into SSM | E+C | todo | Key typed by E in a hidden terminal prompt |
 | T1.11 | Rotate R2 key and Cloudflare token (both expire 2027-11-11) | E+C | todo | Due October 2027, steps in `docs/runbooks/local-secrets.md` |
-| T1.12 | Cloudflare billing notification (R2 has no spend cap) | E+C | todo | Alert to `ops@` (Email Routing live since 2026-11-11) |
+| T1.12 | Cloudflare billing notification (R2 has no spend cap) | E+C | done | 2026-11-12: Billing budget alert at 1 USD to `ops@`, made by hand (provider has no `billing_budget_alert` yet), see `docs/runbooks/cloudflare-billing-alert.md`. Cloudflare default alert at 10 USD kept |
 
 ## Phase 2 — Build (agent, local first)
 
