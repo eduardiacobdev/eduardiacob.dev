@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+  Gmail filters for eduardiacob.dev mail (ADR-0007, "Mail organization").
+  Template: {{GMAIL_USER}} is the local part of the owner's Gmail address,
+  filled in by scripts/gmail-filters.sh from the Keychain. Never commit the
+  rendered file. Import: Gmail > Settings > Filters and Blocked Addresses >
+  Import filters. Labels are created by the import.
+  Mail is never archived: alerts and AWS root mail must stay visible.
+-->
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+  <title>Mail Filters</title>
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:{{GMAIL_USER}}+hello@gmail.com'/>
+    <apps:property name='label' value='eduardiacob.dev/hello'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+    <apps:property name='sizeOperator' value='s_sl'/>
+    <apps:property name='sizeUnit' value='s_smb'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:{{GMAIL_USER}}+ops@gmail.com'/>
+    <apps:property name='label' value='eduardiacob.dev/ops'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+    <apps:property name='sizeOperator' value='s_sl'/>
+    <apps:property name='sizeUnit' value='s_smb'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:{{GMAIL_USER}}+aws@gmail.com'/>
+    <apps:property name='label' value='eduardiacob.dev/aws'/>
+    <apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+    <apps:property name='sizeOperator' value='s_sl'/>
+    <apps:property name='sizeUnit' value='s_smb'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='cloudflare.com OR github.com OR brevo.com'/>
+    <apps:property name='doesNotHaveTheWord' value='deliveredto:({{GMAIL_USER}}+hello@gmail.com OR {{GMAIL_USER}}+ops@gmail.com OR {{GMAIL_USER}}+aws@gmail.com)'/>
+    <apps:property name='label' value='eduardiacob.dev/accounts'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+    <apps:property name='sizeOperator' value='s_sl'/>
+    <apps:property name='sizeUnit' value='s_smb'/>
+  </entry>
+</feed>

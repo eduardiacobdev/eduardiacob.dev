@@ -40,6 +40,7 @@ Goal: project mail never mixes with personal mail, and every message shows which
 - One filter per plus address → its label, never sent to Spam. Mail stays in the inbox: alerts and the AWS root mail must be seen.
 - `accounts`: mail that project services send straight to Gmail (Cloudflare, GitHub, Brevo), filtered by sender. These accounts keep Gmail as their login email so recovery never depends on our own domain.
 - Sending: "Send mail as `hello@`" via Brevo SMTP, with "reply from the same address the message was sent to" on.
+- As code: the filters live in `config/gmail/filters.xml.tmpl` (address replaced by a placeholder) and are imported with [`docs/runbooks/gmail-filters.md`](../runbooks/gmail-filters.md). Set up on 2026-11-11: hello blue, ops orange, aws red and always important, accounts dark grey and limited to mail from that date on.
 
 ## Consequences
 
