@@ -17,6 +17,11 @@ module "dns_email" {
   domain        = local.domain
   gmail_address = var.gmail_address
   aliases       = ["hello", "ops", "aws"]
+
+  # Brevo > Senders, domains, IPs > Domains (manual setup).
+  brevo_code = "84a9bdf8759e8080893b7cafa19968cd"
+  # Cloudflare > Email > DMARC Management, generated for this zone.
+  dmarc_rua = "2e97ee7b8f744c07a7219eb1e7f12ddd@dmarc-reports.cloudflare.net"
 }
 
 output "mail_aliases" {

@@ -33,3 +33,23 @@ variable "aliases" {
     error_message = "Aliases must be lowercase letters, digits and dashes."
   }
 }
+
+variable "brevo_code" {
+  description = "Brevo domain verification code (hex part of the brevo-code TXT value)."
+  type        = string
+
+  validation {
+    condition     = can(regex("^[0-9a-f]{32}$", var.brevo_code))
+    error_message = "Must be the 32-character hex code Brevo shows for the domain."
+  }
+}
+
+variable "dmarc_rua" {
+  description = "Address that receives DMARC aggregate reports (Cloudflare DMARC Management)."
+  type        = string
+
+  validation {
+    condition     = can(regex("^[^@\\s]+@[^@\\s]+$", var.dmarc_rua))
+    error_message = "Must be a plain email address, without mailto:."
+  }
+}

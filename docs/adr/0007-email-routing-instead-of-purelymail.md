@@ -11,7 +11,7 @@ The brief uses Purelymail (10 $/year) as the mailbox for the domain. Its checkou
 ## Decision
 
 - **Inbound:** Cloudflare Email Routing (free) forwards `hello@`, `ops@` and `aws@eduardiacob.dev` to the owner's personal Gmail. Unknown addresses are dropped, no catch-all.
-- **Outbound as `hello@`:** Gmail "Send mail as" through Brevo SMTP (free plan, already in the architecture for transactional mail). SPF and DKIM for Brevo are published on the domain, DMARC starts at `p=none` with reports and is tightened once aligned mail is confirmed.
+- **Outbound as `hello@`:** Gmail "Send mail as" through Brevo SMTP (free plan, already in the architecture for transactional mail). Brevo DKIM is published on the domain (`d=eduardiacob.dev`), so DMARC aligns on DKIM; no SPF include is needed because Brevo uses its own Return-Path domain. DMARC starts at `p=none` with aggregate reports to Cloudflare DMARC Management and is tightened once aligned mail is confirmed (T3.2). Setup and rotation: [`docs/runbooks/brevo-gmail-send-as.md`](../runbooks/brevo-gmail-send-as.md).
 - **As code:** Email Routing settings, rules and DNS records are managed by Terraform in the `dns-email` module. The destination Gmail address is verified once by the owner [human].
 - No new account and no payment.
 

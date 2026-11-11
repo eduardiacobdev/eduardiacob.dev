@@ -26,8 +26,8 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T1.7 | Domain mail: Cloudflare Email Routing, `hello@` `ops@` `aws@` → Gmail (ADR-0007) | E+C | done | 2026-11-11: MX/SPF/DKIM, 3 destinations, 3 forward rules and catch-all drop applied, no drift (MX change confirmed by E). Gmail labels and filters set up (`docs/runbooks/gmail-filters.md`). Delivery test from an external mailbox: all 3 aliases arrived in about 20 s with the right label, SPF/DKIM/DMARC/ARC pass, DKIM signed by `eduardiacob.dev` |
 | T1.8 | AWS account, **advanced** sign-up, Free plan, root MFA | E | blocked | Wait for T2.x + Email Routing live (ADR-0006): saves free-plan months |
 | T1.9 | IAM admin user with MFA (ADR-0002), `aws login` works | E+C | todo | C gives exact clicks; E sets password/MFA |
-| T1.10 | Brevo free account, API key into SSM | E+C | todo | Key typed by E in a hidden terminal prompt |
-| T1.11 | Rotate R2 key and Cloudflare token (both expire 2027-11-11) | E+C | todo | Due October 2027, steps in `docs/runbooks/local-secrets.md` |
+| T1.10 | Brevo free account, domain authenticated, Gmail "Send mail as `hello@`" | E+C | done | 2026-11-12: Brevo free, domain DNS via Terraform (brevo-code, DKIM CNAMEs, DMARC imported), sender `hello@` verified, SMTP key `gmail-send-as-hello` (expires about 2027-11-12) only in Brevo and Gmail, test delivered. See `docs/runbooks/brevo-gmail-send-as.md`. Brevo API key into SSM moves to T3.7 |
+| T1.11 | Rotate R2 key, Cloudflare token (expire 2027-11-11) and Brevo SMTP key (about 2027-11-12) | E+C | todo | Due October 2027, steps in `docs/runbooks/local-secrets.md` and `docs/runbooks/brevo-gmail-send-as.md` |
 | T1.12 | Cloudflare billing notification (R2 has no spend cap) | E+C | done | 2026-11-12: Billing budget alert at 1 USD to `ops@`, made by hand (provider has no `billing_budget_alert` yet), see `docs/runbooks/cloudflare-billing-alert.md`. Cloudflare default alert at 10 USD kept |
 
 ## Phase 2 — Build (agent, local first)
@@ -50,7 +50,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T3.4 | GitHub OIDC + deploy role | C | todo | |
 | T3.5 | Frontend live on HTTPS with security headers | C | todo | |
 | T3.6 | API live, `/api/health` 200 | C | todo | |
-| T3.7 | Contact form end-to-end (Streams → Brevo, DLQ alarm) | C | todo | |
+| T3.7 | Contact form end-to-end (Streams → Brevo, DLQ alarm) | C | todo | Brevo API key into SSM, typed by E at a hidden prompt |
 | T3.8 | Observability: 7-day logs, alarms tested | C | todo | |
 
 ## Phase 4 — Later
