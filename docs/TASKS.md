@@ -45,7 +45,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
 | T3.1 | R2 state backend, `terraform init` | C | done | 2026-11-11: state in `eduardiacob-dev-tfstate`, lockfile locking, `scripts/tf.sh` |
-| T3.2 | DNS + email records, DNSSEC, CAA | C | todo | E confirms MX change |
+| T3.2 | DNS + email records, DNSSEC, CAA | C | doing | 2026-11-12: PR #3 and #4 applied. DMARC `p=quarantine`. CAA `issue amazon.com`, `issuewild ";"`, `iodef` to `ops@`; Universal SSL off so Cloudflare adds no CAA for its own CAs (verified with `dig CAA` on both nameservers and 1.1.1.1). DNSSEC on, DNSKEY published; waiting for Cloudflare Registrar to publish the DS at the .dev registry (status `pending`). Done when `dig DS eduardiacob.dev @ns-tld2.charlestonroadregistry.com` answers, resolvers set `ad` and `plan` shows no drift. `p=reject` after clean DMARC reports |
 | T3.3 | Guardrails: budgets, Budget Action, anomaly detection, SNS | C | todo | First thing on AWS |
 | T3.4 | GitHub OIDC + deploy role | C | todo | |
 | T3.5 | Frontend live on HTTPS with security headers | C | todo | |
