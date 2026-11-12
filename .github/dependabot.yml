@@ -42,5 +42,15 @@ updates:
     groups:
       web:
         patterns: ["*"]
+    # Held back on purpose (docs/runbooks/web.md): eslint-config-next does not
+    # support ESLint 10 or TypeScript 6.1+ yet, and @types/node follows the
+    # Node major in .node-version. Lift each one when that changes.
+    ignore:
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: typescript
+        versions: [">= 6.1.0"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     commit-message:
       prefix: build

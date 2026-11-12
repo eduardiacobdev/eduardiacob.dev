@@ -63,3 +63,6 @@ Versions are exact. pnpm installs only releases at least 7 days old (`minimumRel
 Pinned on purpose:
 
 - TypeScript 6.0 and ESLint 9: `eslint-config-next` 16 and its plugins do not support TypeScript 7 or ESLint 10 yet. Bump when their peer ranges do.
+- `@types/node` 22: matches the Node major in `.node-version`. Bump both together.
+
+Dependabot skips these (`ignore` in `.github/dependabot.yml`); remove the entry when the pin is lifted.
