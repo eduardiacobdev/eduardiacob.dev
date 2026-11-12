@@ -12,7 +12,8 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T0.1 | Architecture review + ADRs 0001–0007 | C | done | `docs/reviews`, `docs/adr` |
 | T0.2 | Brand brief: who you are, target, 2–3 reference sites | E | done | 2026-11-12: `docs/brand/brief.md`. Reputation-first personal site, immersive 3D, EN + IT, HTML-first for SEO/GEO and accessibility |
 | T0.3 | Brand identity (name treatment, palette, type, voice) + 3D world concept | C | done | 2026-11-12: E chose concept B, Rilievo (topographic island), out of three. See `docs/brand/identity.md`. Light `signal` darkened to pass WCAG AA |
-| T0.4 | Content inventory: 3–6 projects, short bio, experience without company names, links, photo yes/no, 2–3 technical decisions | E | todo | Voice lines in `identity.md` are drafts until this arrives; then the copy goes into `apps/web` dictionaries |
+| T0.4 | Content inventory: 3–6 projects, short bio, experience without company names, links, photo yes/no, 2–3 technical decisions | E | done | 2026-11-12: `docs/brand/content.md`. Identity line and bio in `apps/web` dictionaries. Four projects: this site, GeminiPort (named) and two anonymous case studies |
+| T0.5 | Case study details for GeminiPort, AI in an LMS and the MongoDB migration (problem, options, choice, result, public images) | E | todo | Questions listed in `docs/brand/content.md`. C drafts the write-ups from the answers |
 
 ## Phase 1 — Accounts (human)
 
