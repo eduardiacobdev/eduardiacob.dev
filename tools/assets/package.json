@@ -1,0 +1,12 @@
+{
+  "name": "assets",
+  "private": true,
+  "description": "Build-time 3D asset pipeline: compress glTF models and textures for apps/web.",
+  "type": "module",
+  "scripts": {
+    "gltf": "gltf-transform"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "4.5.1"
+  }
+}

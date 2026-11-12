@@ -1,6 +1,6 @@
 # Runbook: local tooling
 
-Local tools live in `~/.local/bin`, with no sudo and no Homebrew (Homebrew is blocked by the old Command Line Tools on this Mac). Every download is an official release, pinned to a version.
+Local tools live in `~/.local/bin`, with no sudo and no Homebrew (Homebrew is blocked by the old Command Line Tools on this Mac). Every download is an official release, pinned to a version, and at least 7 days old (the same cooldown as pnpm and Dependabot).
 
 | Tool | Version | Source | Check | Installed |
 |---|---|---|---|---|
@@ -9,6 +9,8 @@ Local tools live in `~/.local/bin`, with no sudo and no Homebrew (Homebrew is bl
 | pre-commit | 4.7.0 | PyPI, in the venv `~/.local/share/pre-commit-venv`, linked into `~/.local/bin` | pip over HTTPS | 2026-11-12 |
 | corepack | 0.36.0 | npm registry, global under nvm Node 22 (`npm i -g corepack@0.36.0`) | npm registry integrity | 2026-11-12 |
 | pnpm | 12.18.0 | corepack, from `packageManager` in `package.json`; shims in `~/.local/bin` | SHA-512 in `packageManager` + npm registry signature of the native binary | 2026-11-12 |
+| Blender | 5.2.3 LTS | download.blender.org, `blender-5.2.3-macos-arm64.dmg`, copied to `~/Applications` | SHA256 from the release `.sha256` file + Apple notarization (Stichting Blender Foundation) | 2026-11-12 |
+| KTX-Software (`ktx`, `toktx`) | 4.4.2 | GitHub release `KhronosGroup/KTX-Software`, `Darwin-arm64.pkg` expanded with `pkgutil --expand-full` (no installer, no sudo) into `~/.local/share/ktx-software-4.4.2`, linked into `~/.local/bin` | SHA256 from the release asset digest + Apple notarization (The Khronos Group) | 2026-11-12 |
 
 Add `~/.local/bin` to PATH in `~/.zprofile`:
 
@@ -52,3 +54,8 @@ The version lives in one place: `packageManager` in the root `package.json`, wit
 - pre-commit hooks: `pre-commit autoupdate --freeze` writes the new commit SHA; check the upstream changelog before merging.
 - pnpm: `corepack use pnpm@<version>` rewrites `packageManager` with the new hash; commit it with the lockfile.
 - Terraform: download the new release, check SHA256 and notarization, then bump `required_version` if needed.
+- Blender: stay on the LTS line; take a new release once it is 7 days old, check SHA256 and notarization, and replace `~/Applications/Blender.app`.
+- KTX-Software: expand the new `.pkg` into a new `~/.local/share/ktx-software-<version>` and repoint the links.
+- gltf-transform: Dependabot bumps it in `tools/assets/package.json`.
+
+The 3D asset pipeline that uses Blender, KTX-Software and gltf-transform is in [`assets.md`](assets.md).
