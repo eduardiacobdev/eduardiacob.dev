@@ -31,3 +31,8 @@ out/
 
 # PHP / Laravel
 vendor/
+
+
+# Next.js generated
+next-env.d.ts
+*.tsbuildinfo

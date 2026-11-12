@@ -7,7 +7,8 @@ Local tools live in `~/.local/bin`, with no sudo and no Homebrew (Homebrew is bl
 | Terraform | 1.17.2 | releases.hashicorp.com | SHA256 + Apple notarization | 2026-11-11 |
 | gitleaks | 8.30.1 | GitHub release `gitleaks/gitleaks` | SHA256 from the release checksums file | 2026-11-12 |
 | pre-commit | 4.7.0 | PyPI, in the venv `~/.local/share/pre-commit-venv`, linked into `~/.local/bin` | pip over HTTPS | 2026-11-12 |
-| pnpm | — | not installed yet, decided with T2.2 | — | — |
+| corepack | 0.36.0 | npm registry, global under nvm Node 22 (`npm i -g corepack@0.36.0`) | npm registry integrity | 2026-11-12 |
+| pnpm | 12.18.0 | corepack, from `packageManager` in `package.json`; shims in `~/.local/bin` | SHA-512 in `packageManager` + npm registry signature of the native binary | 2026-11-12 |
 
 Add `~/.local/bin` to PATH in `~/.zprofile`:
 
@@ -36,8 +37,18 @@ Checked on 2026-11-12: all hooks pass on the repo, and a staged fake GitHub toke
 
 The hooks are a fast local net, not the gate: CI runs gitleaks on the full history and branch protection requires it. Do not skip them with `--no-verify`.
 
+## pnpm
+
+The version lives in one place: `packageManager` in the root `package.json`, with its SHA-512. Corepack downloads exactly that version on the Mac and on CI. Corepack 0.34 (bundled with Node 22) cannot run pnpm 11 or later, hence 0.36.0.
+
+[`pnpm-workspace.yaml`](../../pnpm-workspace.yaml) sets:
+
+- `minimumReleaseAge: 10080`: pnpm installs only versions published at least 7 days ago, the same cooldown as Dependabot. A compromised release is usually caught within days.
+- `strictDepBuilds: true`: no dependency runs install scripts unless listed.
+
 ## Updates
 
 - gitleaks: bump the local binary and `GITLEAKS_VERSION` in `ci.yml` in the same PR.
 - pre-commit hooks: `pre-commit autoupdate --freeze` writes the new commit SHA; check the upstream changelog before merging.
+- pnpm: `corepack use pnpm@<version>` rewrites `packageManager` with the new hash; commit it with the lockfile.
 - Terraform: download the new release, check SHA256 and notarization, then bump `required_version` if needed.

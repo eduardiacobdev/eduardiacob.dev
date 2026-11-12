@@ -98,6 +98,41 @@ jobs:
       - name: shellcheck
         run: shellcheck --version && shellcheck scripts/*.sh
 
+  # apps/web: same pnpm as the Mac (packageManager in package.json, through
+  # Corepack). No dependency cache: installs stay reproducible from the lockfile.
+  web:
+    name: web (lint, typecheck, test, build)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - name: pnpm via corepack
+        run: |
+          npm install --global corepack@0.36.0
+          corepack enable pnpm
+          pnpm --version
+      - name: install
+        run: pnpm install --frozen-lockfile
+      - name: lint
+        run: pnpm --filter web lint
+      - name: typecheck
+        run: pnpm --filter web typecheck
+      - name: test
+        run: pnpm --filter web test
+      - name: build
+        run: pnpm --filter web build
+
   # Plan against the real state, posted on the PR. The repo is public, so the
   # comment and the log show only Terraform's masked output, with any Gmail
   # address redacted on top. Skipped for forks and Dependabot (no secrets).

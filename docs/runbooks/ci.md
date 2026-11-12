@@ -10,9 +10,10 @@ The repo `eduardiacobdev/eduardiacob.dev` is public (architecture review A3). Ev
 | | `terraform (fmt, validate, tflint)` | `fmt -check`, `init -backend=false`, `validate`, tflint with the recommended preset (`.tflint.hcl`) |
 | | `policy (checkov)` | Policy checks on Terraform and on the workflows (review A7) |
 | | `scripts (shellcheck)` | Lints `scripts/*.sh` |
+| | `web (lint, typecheck, test, build)` | `apps/web`: pnpm through corepack, `install --frozen-lockfile`, ESLint, `tsc`, Vitest, `next build` (static export) |
 | | `terraform plan (prod)` | PRs only: plans against the R2 state and posts the plan as a PR comment (review A5) |
-| `.github/workflows/codeql.yml` | `codeql (actions)` | CodeQL `security-extended` on the workflows, weekly and on every change. Add `javascript-typescript` when `apps/web` exists |
-| `.github/dependabot.yml` | — | Weekly grouped updates for Actions and Terraform providers, 7-day cooldown |
+| `.github/workflows/codeql.yml` | `codeql (actions)`, `codeql (javascript-typescript)` | CodeQL `security-extended` on the workflows and on `apps/web`, weekly and on every change. Add `php` when `apps/api` exists |
+| `.github/dependabot.yml` | — | Weekly grouped updates for Actions, Terraform providers and npm (pnpm workspace), 7-day cooldown |
 
 Rules for workflows:
 

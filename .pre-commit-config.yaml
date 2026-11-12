@@ -30,6 +30,8 @@ repos:
       - id: check-merge-conflict
       - id: check-case-conflict
       - id: check-yaml
+        # pnpm 11+ writes the lockfile as two YAML documents; pnpm validates it.
+        exclude: ^pnpm-lock\.yaml$
       - id: check-json
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable

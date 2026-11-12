@@ -1,0 +1,8 @@
+# pnpm workspace (TASKS T2.2). Supply-chain settings apply to every package.
+packages:
+  - apps/web
+
+# Skip releases younger than 7 days, like the Dependabot cooldown.
+minimumReleaseAge: 10080
+# Install scripts run only for packages listed here (none needed yet).
+strictDepBuilds: true

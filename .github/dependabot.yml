@@ -29,3 +29,18 @@ updates:
         patterns: ["*"]
     commit-message:
       prefix: build
+
+  # pnpm workspace (root lockfile). Grouped weekly; security updates still
+  # arrive on their own as soon as an advisory is published.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    groups:
+      web:
+        patterns: ["*"]
+    commit-message:
+      prefix: build

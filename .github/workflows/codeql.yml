@@ -1,5 +1,5 @@
-# CodeQL code scanning (architecture review A3). Today it covers the GitHub
-# Actions workflows; add javascript-typescript when apps/web lands.
+# CodeQL code scanning (architecture review A3): the GitHub Actions workflows
+# and apps/web (javascript-typescript). Add php when apps/api lands.
 name: codeql
 
 on:
@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [actions]
+        language: [actions, javascript-typescript]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
