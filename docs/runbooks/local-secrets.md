@@ -16,7 +16,7 @@ All items use service name `eduardiacob-dev/<name>` and account `$USER`.
 Cloudflare token permissions (least privilege for the `dns-email` and Turnstile work):
 
 - Account: Email Routing Addresses Edit, Turnstile Sites Edit.
-- Zone `eduardiacob.dev` only: DNS Edit, Zone DNS Settings Edit (DNSSEC), Zone Settings Edit, Zone Read, Email Routing Rules Edit.
+- Zone `eduardiacob.dev` only: DNS Edit, Zone DNS Settings Edit (DNSSEC), Zone Settings Edit, Zone Read, Email Routing Rules Edit, SSL and Certificates Edit (Universal SSL off, added 2026-11-12).
 - No R2, Workers, billing or member permissions. No IP filter (CI runners have no fixed IP).
 
 ## Store or rotate a secret

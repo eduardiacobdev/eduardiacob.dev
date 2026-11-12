@@ -9,8 +9,17 @@ resource "cloudflare_zone_dnssec" "this" {
   status  = "active"
 }
 
-# CAA: only the listed CAs may issue certificates for the domain. While
-# Universal SSL is on, Cloudflare also serves CAA records for its own CAs.
+# Universal SSL off: no record in the zone is proxied (the site is served by
+# CloudFront with an ACM certificate, DNS only), so Cloudflare needs no edge
+# certificate. While Universal SSL is on, Cloudflare adds CAA records for its
+# own CAs, which would defeat the CAA below. Turn it back on before proxying
+# any record, or visitors get no valid certificate.
+resource "cloudflare_universal_ssl_setting" "this" {
+  zone_id = var.zone_id
+  enabled = false
+}
+
+# CAA: only the listed CAs may issue certificates for the domain.
 locals {
   caa = merge(
     { for ca in var.caa_issuers : "issue-${ca}" => { tag = "issue", value = ca } },
