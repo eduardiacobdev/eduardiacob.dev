@@ -36,15 +36,16 @@ resource "cloudflare_dns_record" "brevo_dkim" {
   comment = "Brevo DKIM (ADR-0007), managed by Terraform"
 }
 
-# Monitoring only (p=none) until aligned mail is confirmed, then tightened in
-# T3.2. Aggregate reports go to Cloudflare DMARC Management, which created
-# this record when it was enabled [human]; the content matches its default
-# exactly so the dashboard keeps recognising it.
+# p=quarantine (brief): every sender of @eduardiacob.dev mail (Gmail send-as
+# and the contact form, both through Brevo) is DKIM-aligned, verified on
+# 2026-11-12. Next step is p=reject once the aggregate reports stay clean.
+# Reports go to Cloudflare DMARC Management, which created this record when it
+# was enabled [human]; keep the rua address as it generated it.
 resource "cloudflare_dns_record" "dmarc" {
   zone_id = var.zone_id
   name    = "_dmarc.${var.domain}"
   type    = "TXT"
-  content = "\"v=DMARC1; p=none; rua=mailto:${var.dmarc_rua}\""
+  content = "\"v=DMARC1; p=quarantine; rua=mailto:${var.dmarc_rua}\""
   ttl     = 1
   comment = "DMARC, reports to Cloudflare DMARC Management (ADR-0007), managed by Terraform"
 }

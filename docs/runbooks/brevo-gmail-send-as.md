@@ -10,7 +10,7 @@ Outbound mail from `hello@eduardiacob.dev` leaves Gmail through Brevo SMTP (ADR-
 | Domain `eduardiacob.dev` | Brevo > Senders, domains, IPs > Domains | Authenticated (manual setup) | [human-approved] |
 | Ownership TXT `brevo-code:…` | Cloudflare DNS | `cloudflare_dns_record.brevo_code` | Terraform |
 | DKIM CNAMEs `brevo1/2._domainkey` → `b1/b2.eduardiacob-dev.dkim.brevo.com` | Cloudflare DNS | `cloudflare_dns_record.brevo_dkim` | Terraform |
-| DMARC `p=none`, reports to Cloudflare DMARC Management | Cloudflare DNS | `cloudflare_dns_record.dmarc` (imported) | Terraform |
+| DMARC `p=quarantine` (T3.2), reports to Cloudflare DMARC Management | Cloudflare DNS | `cloudflare_dns_record.dmarc` (imported) | Terraform |
 | Sender `hello@eduardiacob.dev` | Brevo > Senders | Verified automatically (authenticated domain) | [human-approved] |
 | SMTP key `gmail-send-as-hello` | Brevo > SMTP & API > SMTP | Standard key, expires about 2027-11-12 | [human] |
 | Anonymous tracking | Brevo > Settings > Transactional email > Tracking | Yes | [human-approved] |

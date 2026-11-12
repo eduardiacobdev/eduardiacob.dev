@@ -24,10 +24,25 @@ module "dns_email" {
   dmarc_rua = "2e97ee7b8f744c07a7219eb1e7f12ddd@dmarc-reports.cloudflare.net"
 }
 
+module "dns_zone" {
+  source = "../../modules/dns-zone"
+
+  zone_id = data.cloudflare_zone.this.zone_id
+  domain  = local.domain
+
+  # ACM issues the CloudFront certificate (brief: ACM in us-east-1).
+  caa_issuers = ["amazon.com"]
+  caa_iodef   = "ops@${local.domain}"
+}
+
 output "mail_aliases" {
   value = module.dns_email.aliases
 }
 
 output "mail_destinations_verified" {
   value = module.dns_email.destination_status
+}
+
+output "dnssec_ds" {
+  value = module.dns_zone.dnssec_ds
 }
