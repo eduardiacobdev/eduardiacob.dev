@@ -62,7 +62,7 @@ Set with `gh api`, recorded here because GitHub has no settings file:
 | Private vulnerability reporting | On |
 | Merge | Squash only, delete branch on merge |
 | Wiki, Projects | Off |
-| Ruleset `protect-main` | No deletion, no force push on the default branch |
+| Ruleset `protect-main` | Default branch: no deletion, no force push, linear history, PR required (0 approvals, threads resolved, squash only), required checks: `secrets (gitleaks)`, `terraform (fmt, validate, tflint)`, `policy (checkov)`, `scripts (shellcheck)`, `terraform plan (prod)`, `codeql (actions)`. No bypass actors |
 | Actions: default `GITHUB_TOKEN` | Read only, cannot approve PRs |
 | Actions: allowed actions | GitHub-owned, verified creators and the listed ones, full SHA pinning required |
 | Actions: fork PRs | Approval required for every outside contributor |

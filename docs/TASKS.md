@@ -18,7 +18,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
 | T1.1 | GitHub: username `eduardiacobdev`, 2FA + passkey, email private | E | done | 2026-11-11: username, email privacy + push block, TOTP 2FA; recovery codes kept outside the repo |
-| T1.2 | Create the public repo `eduardiacob.dev` and push | C | done | 2026-11-12: `eduardiacobdev/eduardiacob.dev` public, history reviewed and cleaned of personal details before the first push. Secret scanning + push protection, Dependabot alerts + security updates, private vulnerability reporting on. Ruleset `protect-main`: no deletion, no force push (required PR and checks come with T2.5). Squash merge only, wiki and projects off |
+| T1.2 | Create the public repo `eduardiacob.dev` and push | C | done | 2026-11-12: `eduardiacobdev/eduardiacob.dev` public, history reviewed and cleaned of personal details before the first push. Secret scanning + push protection, Dependabot alerts + security updates, private vulnerability reporting on. Ruleset `protect-main` (PR and checks required since T2.5). Squash merge only, wiki and projects off |
 | T1.3 | Cloudflare account (personal Gmail, see recovery chain), 2FA on | E | done | 2026-11-11: TOTP 2FA active; security key optional |
 | T1.4 | Buy `eduardiacob.dev` (Cloudflare Registrar), auto-renew + domain lock | E+C | done | 2026-11-11: registered until 2027-11-11, auto-renew on ($12.20/yr), transfer lock on, WHOIS redacted. DNSSEC left to Terraform (T3.2) |
 | T1.5 | Enable R2 (requires a payment method on file, stays 0 $ in free quota) | E+C | done | 2026-11-11: R2 on, bucket `eduardiacob-dev-tfstate` in EU jurisdiction, bucket-scoped key in Keychain. See `docs/runbooks/local-secrets.md` |
@@ -38,7 +38,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | T2.2 | Scaffold `apps/web` (Next.js static export) | C | todo | |
 | T2.3 | Scaffold `apps/api` (Laravel + Bref, health + contact) | C | todo | |
 | T2.4 | Terraform modules: dns-email, guardrails, cloudfront, lambda-api, dynamodb | C | todo | |
-| T2.5 | CI: lint, test, `plan`, tfsec/checkov, CodeQL, Dependabot | C | doing | 2026-11-12: PR #1 adds gitleaks, terraform fmt/validate/tflint, checkov, shellcheck, plan as PR comment, CodeQL (actions), Dependabot; Actions locked down (SHA pinning, read-only token). See `docs/runbooks/ci.md`. Next: required checks + PR rule on `main`, app lint/test when apps exist |
+| T2.5 | CI: lint, test, `plan`, tfsec/checkov, CodeQL, Dependabot | C | done | 2026-11-12: PR #1 merged: gitleaks, terraform fmt/validate/tflint, checkov, shellcheck, masked `plan` as PR comment (no Gmail in comment or log, verified), CodeQL (actions), Dependabot; Actions locked down (SHA pinning, read-only token). Ruleset `protect-main` now requires a PR and the 6 checks. See `docs/runbooks/ci.md`. App lint/test and CodeQL JS join with T2.2/T2.3 |
 
 ## Phase 3 — Go live (brief phases 2–10)
 
