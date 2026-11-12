@@ -37,6 +37,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GITLEAKS_ENABLE_COMMENTS: "false"
+          # Same version as the local pre-commit hook (docs/runbooks/tooling.md).
+          # Without it the action downloads the latest release on every run.
+          GITLEAKS_VERSION: "8.30.1"
 
   terraform:
     name: terraform (fmt, validate, tflint)

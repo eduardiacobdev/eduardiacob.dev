@@ -52,7 +52,7 @@ R2 has no spending cap. The bucket stays far below the free quota (10 GB, 1M Cla
 
 ## Running Terraform locally
 
-- Terraform is the official HashiCorp binary in `~/.local/bin/terraform` (SHA256 and Apple notarization checked). Add `export PATH="$HOME/.local/bin:$PATH"` to `~/.zprofile`; [`scripts/tf.sh`](../../scripts/tf.sh) falls back to that path anyway.
+- Terraform is the official HashiCorp binary in `~/.local/bin/terraform` ([tooling runbook](tooling.md)); [`scripts/tf.sh`](../../scripts/tf.sh) falls back to that path if it is not on PATH.
 - Always go through the wrapper: `scripts/tf.sh init`, `scripts/tf.sh plan -out=x.tfplan`, `scripts/tf.sh apply x.tfplan`. It exports `CLOUDFLARE_API_TOKEN` and `TF_VAR_gmail_address` from the Keychain into the Terraform process only, and passes `profile=r2` to `init`.
 - Bootstrap exception: the first Email Routing apply (2026-11-11) ran locally because the repo was not on GitHub yet. From the first push on, infra changes go through a PR with the plan attached.
 

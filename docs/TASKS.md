@@ -34,7 +34,7 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
-| T2.1 | Tooling: Terraform/OpenTofu, pnpm, pre-commit, gitleaks | C | doing | 2026-11-11: Terraform 1.17.2 in `~/.local/bin` (Homebrew blocked by old Command Line Tools). Rest todo |
+| T2.1 | Tooling: Terraform/OpenTofu, pnpm, pre-commit, gitleaks | C | doing | 2026-11-12: Terraform 1.17.2, gitleaks 8.30.1 (same version pinned in CI), pre-commit 4.7.0 in `~/.local/bin`; hooks in `.pre-commit-config.yaml` pass and block a fake token and key. See `docs/runbooks/tooling.md`. pnpm open: corepack 0.34 (Node 22) cannot run pnpm 11+, decide with T2.2 |
 | T2.2 | Scaffold `apps/web` (Next.js static export) | C | todo | |
 | T2.3 | Scaffold `apps/api` (Laravel + Bref, health + contact) | C | todo | |
 | T2.4 | Terraform modules: dns-email, guardrails, cloudfront, lambda-api, dynamodb | C | todo | |
