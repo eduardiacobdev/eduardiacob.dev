@@ -6,3 +6,10 @@ packages:
 minimumReleaseAge: 10080
 # Install scripts run only for packages listed here (none needed yet).
 strictDepBuilds: true
+
+# Security overrides. Remove each one when the parent depends on a fixed
+# version by itself (check with `pnpm why <package> -r`).
+overrides:
+  # GHSA-g3hv-75wg-m249 (DoS by glob pattern amplification): fixed only in
+  # minimatch 11. Lint-time only (typescript-eslint), never in the site.
+  "@typescript-eslint/typescript-estree>minimatch": "^11.0.1"
