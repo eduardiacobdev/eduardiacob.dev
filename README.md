@@ -20,3 +20,4 @@ See [`docs/reviews/2026-11-11-architecture-review.md`](docs/reviews/2026-11-11-a
 Instructions will be added as each phase lands.
 
 - Local secrets and the R2 state backend: [`docs/runbooks/local-secrets.md`](docs/runbooks/local-secrets.md).
+- 3D asset pipeline (Blender, KTX2, Meshopt): [`docs/runbooks/assets.md`](docs/runbooks/assets.md).
