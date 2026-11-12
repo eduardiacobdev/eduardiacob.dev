@@ -10,8 +10,8 @@ Rule: every human step is prepared and pre-filled in advance; Eduard only types 
 | ID | Task | Owner | Status | Notes |
 |---|---|---|---|---|
 | T0.1 | Architecture review + ADRs 0001–0007 | C | done | `docs/reviews`, `docs/adr` |
-| T0.2 | Brand brief: who you are, target, 2–3 reference sites | E | todo | E answers, C writes it up |
-| T0.3 | Brand identity (name treatment, palette, type, voice) | C | todo | After T0.2 |
+| T0.2 | Brand brief: who you are, target, 2–3 reference sites | E | done | 2026-11-12: `docs/brand/brief.md`. Reputation-first personal site, immersive 3D, EN + IT, HTML-first for SEO/GEO and accessibility |
+| T0.3 | Brand identity (name treatment, palette, type, voice) + 3D world concept | C | todo | 2–3 concept options for E to choose. Needs E's content inventory (projects, bio, links) |
 
 ## Phase 1 — Accounts (human)
 
